@@ -1,0 +1,21 @@
+{
+  "name": "mobile-assets-skills",
+  "description": "Generate mobile app graphics/icons via Nano Banana 2/Pro, remove backgrounds, and process to platform-specific PNGs for Android, iOS, Flutter, and React Native.",
+  "version": "1.0.0",
+  "author": {
+    "name": "tsnAnh"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mobile",
+    "assets",
+    "icons",
+    "graphics",
+    "android",
+    "ios",
+    "flutter",
+    "react-native",
+    "nano-banana",
+    "image-generation"
+  ]
+}

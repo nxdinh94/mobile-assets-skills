@@ -1,0 +1,29 @@
+{
+  "name": "latest",
+  "owner": {
+    "name": "tsnAnh"
+  },
+  "metadata": {
+    "description": "Mobile asset generation and processing tools for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "mobile-assets-skills",
+      "source": ".",
+      "description": "Generate mobile app graphics/icons via Nano Banana 2/Pro, remove backgrounds, and process to platform-specific PNGs for Android, iOS, Flutter, and React Native.",
+      "version": "1.0.0",
+      "category": "mobile-development",
+      "tags": [
+        "mobile",
+        "assets",
+        "icons",
+        "image-generation",
+        "android",
+        "ios",
+        "flutter",
+        "react-native"
+      ]
+    }
+  ]
+}
