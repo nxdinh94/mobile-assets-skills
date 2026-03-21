@@ -28,7 +28,7 @@ export GEMINI_API_KEY="your-key"   # https://aistudio.google.com/apikey
 
 ```bash
 # Add marketplace and install
-/plugin marketplace add <github-user>/mobile-assets-skills
+/plugin marketplace add tsnAnh/mobile-assets-skills
 /plugin install mobile-assets-skills@latest
 ```
 
