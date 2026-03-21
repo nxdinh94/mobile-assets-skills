@@ -134,8 +134,9 @@ def generate_with_model(client, model_id, prompt, aspect_ratio, size):
 
 def generate_asset(concept, asset_type, output_path, aspect_ratio=None,
                    size="2K", custom_prompt=None, verbose=False, dry_run=False,
-                   remove_bg=False, bg_method="auto", bg_fuzz=10):
-    """Generate a mobile asset image with Nano Banana 2 -> Pro fallback."""
+                   remove_bg=True, bg_method="auto", bg_fuzz=10):
+    """Generate a mobile asset image with Nano Banana 2 -> Pro fallback.
+    Background removal is enabled by default for PNG output."""
     # Build prompt first (needed for dry-run)
     if custom_prompt:
         prompt = custom_prompt
@@ -224,8 +225,10 @@ def main():
                         help="Override aspect ratio")
     parser.add_argument("--size", choices=["1K", "2K", "4K"], default="2K")
     parser.add_argument("--prompt", "-p", default=None, help="Custom prompt override")
-    parser.add_argument("--remove-bg", action="store_true",
-                        help="Remove background for transparent PNG")
+    parser.add_argument("--remove-bg", action="store_true", default=True,
+                        help="Remove background for transparent PNG (default: on)")
+    parser.add_argument("--no-remove-bg", dest="remove_bg", action="store_false",
+                        help="Keep original background")
     parser.add_argument("--bg-method",
                         choices=["auto", "rmbg", "rmbg-briaai", "rmbg-u2netp", "magick"],
                         default="auto", help="Background removal method (default: auto)")
