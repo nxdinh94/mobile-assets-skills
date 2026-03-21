@@ -230,8 +230,8 @@ def main():
     parser.add_argument("--no-remove-bg", dest="remove_bg", action="store_false",
                         help="Keep original background")
     parser.add_argument("--bg-method",
-                        choices=["auto", "rmbg", "rmbg-briaai", "rmbg-u2netp", "magick"],
-                        default="auto", help="Background removal method (default: auto)")
+                        choices=["auto", "birefnet", "u2net", "isnet", "magick"],
+                        default="auto", help="Background removal method (default: auto = birefnet)")
     parser.add_argument("--bg-fuzz", type=int, default=10,
                         help="Fuzz %% for magick bg removal (default: 10)")
     parser.add_argument("--verbose", "-v", action="store_true")

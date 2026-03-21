@@ -18,7 +18,7 @@ Claude Code plugin for generating and processing mobile app assets (icons, splas
 ```bash
 pip install google-genai          # Nano Banana API
 brew install imagemagick           # Image processing
-npm install -g rmbg-cli            # AI background removal (recommended)
+pip install "rembg[cpu]"            # AI background removal (BiRefNet)
 export GEMINI_API_KEY="your-key"   # https://aistudio.google.com/apikey
 ```
 
@@ -86,8 +86,8 @@ python scripts/process_assets.py /tmp/feature.png -t feature -o ./store-assets -
 ### Remove background only
 
 ```bash
-python scripts/remove_bg.py input.png -o output.png -v
-python scripts/remove_bg.py input.png -o output.png --method rmbg-briaai
+python scripts/remove_bg.py input.png -o output.png -v            # birefnet (default)
+python scripts/remove_bg.py input.png -o output.png --method u2net  # faster alternative
 ```
 
 ## Structure

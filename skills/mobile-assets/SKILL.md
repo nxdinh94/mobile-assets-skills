@@ -16,7 +16,7 @@ This skill handles mobile asset generation and processing. Does NOT handle: anim
 ```bash
 pip install google-genai         # Nano Banana API
 brew install imagemagick          # Image processing (magick)
-npm install -g rmbg-cli           # AI background removal (recommended)
+pip install "rembg[cpu]"           # AI background removal (BiRefNet)
 export GEMINI_API_KEY="your-key"  # Or add to ~/.claude/.env
 ```
 
@@ -54,7 +54,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/generate_asset.py" "<concept>" [options]
 | `--size` | `1K`, `2K`, `4K` (default: 2K) |
 | `--prompt, -p` | Custom prompt override |
 | `--remove-bg` | Remove background for transparent PNG |
-| `--bg-method` | `auto`, `rmbg`, `rmbg-briaai`, `rmbg-u2netp`, `magick` |
+| `--bg-method` | `auto`, `birefnet`, `u2net`, `isnet`, `magick` |
 | `--dry-run` | Preview prompt without generating |
 | `-v` | Verbose output |
 
@@ -73,7 +73,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/process_assets.py" <source.png> [options]
 | `--adaptive-layer` | `foreground` or `background` (Android adaptive icons) |
 | `--sizes` | Custom sizes for generic type (e.g., `48 72 96`) |
 | `--remove-bg` | Remove background before resizing |
-| `--bg-method` | `auto`, `rmbg`, `rmbg-briaai`, `rmbg-u2netp`, `magick` |
+| `--bg-method` | `auto`, `birefnet`, `u2net`, `isnet`, `magick` |
 | `-v` | Verbose output |
 
 ## Background Removal
@@ -83,14 +83,14 @@ Nano Banana cannot generate transparent PNGs. Use `--remove-bg` to strip backgro
 ```bash
 S="${CLAUDE_PLUGIN_ROOT}/scripts"
 
-# During generation (auto: rmbg-briaai -> magick fallback)
-python "$S/generate_asset.py" "chat icon" -t icon -o /tmp/icon.png --remove-bg -v
+# During generation (auto: birefnet -> magick fallback)
+python "$S/generate_asset.py" "chat icon" -t icon -o /tmp/icon.png -v
 
 # Standalone removal
 python "$S/remove_bg.py" input.png -o output.png -v
 
-# High-quality model
-python "$S/remove_bg.py" input.png -o output.png --method rmbg-briaai
+# Specific model
+python "$S/remove_bg.py" input.png -o output.png --method u2net
 ```
 
 ## Common Recipes
