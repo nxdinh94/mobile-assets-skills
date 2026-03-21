@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "mobile-assets-skills",
-      "source": ".",
+      "source": "./",
       "description": "Generate mobile app graphics/icons via Nano Banana 2/Pro, remove backgrounds, and process to platform-specific PNGs for Android, iOS, Flutter, and React Native.",
       "version": "1.0.0",
       "category": "mobile-development",
