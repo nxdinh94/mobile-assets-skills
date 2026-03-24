@@ -5,7 +5,7 @@ Claude Code plugin for generating and processing mobile app assets (icons, splas
 ## Features
 
 - **Image Generation** via Nano Banana 2 (flash) with automatic fallback to Nano Banana Pro
-- **Background Removal** via rmbg (AI-powered) with ImageMagick fallback for transparent PNGs
+- **Background Removal** via rembg (AI-powered, BiRefNet model) with ImageMagick fallback — **enabled by default** for PNG output
 - **Asset Types**: App icons, splash screens, feature graphics, illustrations, in-app icons
 - **All Platforms**: Android, iOS, Flutter, React Native
 - **Auto-Detection**: Detects project type from directory structure
@@ -46,10 +46,13 @@ cp -r . .claude/skills/mobile-assets-skills
 
 ## Usage
 
-### Generate a transparent app icon
+### Generate an app icon (transparent by default)
 
 ```bash
-python scripts/generate_asset.py "fitness tracker" -t icon -o /tmp/icon.png --remove-bg -v
+python scripts/generate_asset.py "fitness tracker" -t icon -o /tmp/icon.png -v
+
+# Keep original background (disable auto-removal)
+python scripts/generate_asset.py "fitness tracker" -t icon -o /tmp/icon.png --no-remove-bg -v
 ```
 
 ### Process to all platform sizes
@@ -72,7 +75,7 @@ python scripts/process_assets.py /tmp/splash.png -t splash -d . -v
 ### Android adaptive icon layers
 
 ```bash
-python scripts/generate_asset.py "app foreground" -t icon -o /tmp/fg.png --remove-bg
+python scripts/generate_asset.py "app foreground" -t icon -o /tmp/fg.png
 python scripts/process_assets.py /tmp/fg.png -t icon --adaptive-layer foreground -d .
 ```
 
@@ -83,11 +86,13 @@ python scripts/generate_asset.py "app showcase" -t feature -o /tmp/feature.png -
 python scripts/process_assets.py /tmp/feature.png -t feature -o ./store-assets -v
 ```
 
-### Remove background only
+### Remove background only (standalone)
 
 ```bash
-python scripts/remove_bg.py input.png -o output.png -v            # birefnet (default)
-python scripts/remove_bg.py input.png -o output.png --method u2net  # faster alternative
+python scripts/remove_bg.py input.png -o output.png -v              # birefnet (default)
+python scripts/remove_bg.py input.png -o output.png --method u2net   # faster alternative
+python scripts/remove_bg.py input.png -o output.png --method isnet   # general-use model
+python scripts/remove_bg.py input.png -o output.png --method magick  # color-based, solid backgrounds only
 ```
 
 ## Structure

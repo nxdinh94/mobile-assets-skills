@@ -28,19 +28,28 @@ Detection logic:
 
 ### Step 3: Generate Base Image
 
+Background removal is **enabled by default** — generated PNGs automatically get transparent backgrounds via BiRefNet. Use `--no-remove-bg` to keep the original background.
+
 ```bash
-# Standard generation
+# Standard generation (bg removed by default)
 python scripts/generate_asset.py "music player" --type icon -o /tmp/icon_base.png -v
+
+# Keep original background
+python scripts/generate_asset.py "music player" --type icon -o /tmp/icon_base.png --no-remove-bg -v
 
 # Custom prompt for specific requirements
 python scripts/generate_asset.py "music player" --type icon -o /tmp/icon_base.png \
     --prompt "A minimalist music note icon, gradient blue to purple, no text" -v
+
+# Choose specific bg removal method
+python scripts/generate_asset.py "music player" --type icon -o /tmp/icon_base.png --bg-method u2net -v
 
 # Dry run to preview prompt
 python scripts/generate_asset.py "music player" --type icon -o /tmp/icon.png --dry-run
 ```
 
 Model priority: Nano Banana 2 (flash) → Nano Banana Pro (fallback).
+Background removal: BiRefNet (rembg) → ImageMagick (fallback).
 
 ### Step 4: Process to Platform Sizes
 
@@ -74,6 +83,7 @@ After processing, verify assets exist in correct directories:
 
 ### New App Icon
 ```bash
+# Background removed by default — output is transparent PNG
 python scripts/generate_asset.py "fitness tracker app" --type icon -o /tmp/icon.png -v
 python scripts/process_assets.py /tmp/icon.png --type icon -d /path/to/project -p auto -v
 ```
@@ -106,6 +116,9 @@ python scripts/process_assets.py /tmp/empty_state.png --type generic \
 | `GEMINI_API_KEY not found` | Set env var or add to `~/.claude/.env` |
 | `google-genai not installed` | `pip install google-genai` |
 | `ImageMagick not found` | `brew install imagemagick` (macOS) |
+| `rembg not installed` | `pip install "rembg[cpu]"` — needed for AI bg removal |
 | Flash model fails | Auto-falls back to Pro; check API quota |
 | Wrong project detected | Use `--platform` flag explicitly |
 | Icons look blurry | Generate at higher `--size` (4K) |
+| Background not removed | Check rembg installed; try `--bg-method magick` for solid backgrounds |
+| Want to keep background | Use `--no-remove-bg` flag with `generate_asset.py` |
